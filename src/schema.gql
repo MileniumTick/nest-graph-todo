@@ -1,0 +1,64 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Todo {
+  id: Int!
+  description: String!
+  done: Boolean!
+}
+
+"""Todo quick aggregations"""
+type AggregationsType {
+  """Total of todos"""
+  total: Int!
+
+  """Total of todos completed"""
+  completed: Int!
+
+  """Total of todos pending"""
+  pending: Int!
+
+  """Total of todos (deprecated)"""
+  totals: Int! @deprecated(reason: "Most dont used instead")
+}
+
+type Query {
+  """Retorna un hola mundo en ingles"""
+  hola: String!
+  randomNumber: Float!
+
+  """Random number from zero to exclusive"""
+  randomZeroTo(to: Int! = 6): Int!
+  todos(
+    """Status of your todos!"""
+    status: Boolean
+  ): [Todo!]!
+  findTodo(id: Int! = 0): Todo!
+  totalTodos: Int!
+  completedTodos: Int!
+  pendingTodos: Int!
+  aggregations: AggregationsType!
+}
+
+type Mutation {
+  createTodo(createTodoInput: CreatetodoInput!): Todo!
+  updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
+  deleteTodo(id: Int!): Todo!
+}
+
+input CreatetodoInput {
+  """What do you needs to be done!"""
+  description: String!
+}
+
+input UpdateTodoInput {
+  """The todo id"""
+  id: Int!
+
+  """What do you needs to be done!"""
+  description: String
+
+  """Is the todo done?"""
+  done: Boolean = false
+}
